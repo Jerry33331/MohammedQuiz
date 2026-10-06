@@ -1,0 +1,371 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap");
+
+:root {
+  color-scheme: light;
+  font-family: "DM Sans", sans-serif;
+  color: #202b29;
+  background: #f7f7f2;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  --ink: #202b29;
+  --muted: #737c75;
+  --green: #587e68;
+  --lime: #d6ed89;
+  --paper: #f7f7f2;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+  background:
+    radial-gradient(ellipse at 85% 18%, rgba(218, 230, 196, 0.3), transparent 25rem),
+    var(--paper);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.page-shell {
+  display: flex;
+  width: min(100% - 96px, 1240px);
+  min-height: 100vh;
+  margin: 0 auto;
+  flex-direction: column;
+}
+
+.topbar {
+  display: flex;
+  min-height: 92px;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(32, 43, 41, 0.1);
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 11px;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+.brand-mark {
+  display: grid;
+  width: 31px;
+  height: 31px;
+  place-items: center;
+  border-radius: 10px;
+  background: var(--ink);
+  color: var(--lime);
+  font-family: "Manrope", sans-serif;
+  font-size: 17px;
+  font-weight: 800;
+}
+
+.topbar-note {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.live-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #8dad62;
+  box-shadow: 0 0 0 4px rgba(141, 173, 98, 0.14);
+}
+
+.hero {
+  display: grid;
+  flex: 1;
+  min-height: 590px;
+  grid-template-columns: 1fr 0.9fr;
+  align-items: center;
+  gap: 40px;
+  padding: 62px 0 76px;
+}
+
+.hero-copy {
+  position: relative;
+  z-index: 1;
+  max-width: 570px;
+}
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 23px;
+  color: var(--green);
+  font-family: "DM Mono", monospace;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+}
+
+.eyebrow span {
+  font-size: 15px;
+}
+
+h1 {
+  margin: 0;
+  font-family: "Manrope", sans-serif;
+  font-size: clamp(68px, 10.3vw, 130px);
+  font-weight: 800;
+  letter-spacing: -0.095em;
+  line-height: 0.94;
+}
+
+h1 span {
+  color: var(--green);
+}
+
+.hero-description {
+  max-width: 405px;
+  margin: 29px 0 0;
+  color: #68736b;
+  font-size: 16px;
+  line-height: 1.8;
+}
+
+.hero-caption {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 39px;
+  color: #37423b;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.caption-line {
+  width: 30px;
+  height: 1px;
+  background: #97aa83;
+}
+
+.visual-card {
+  position: relative;
+  display: grid;
+  width: min(100%, 440px);
+  aspect-ratio: 1 / 0.94;
+  justify-self: end;
+  place-items: center;
+  overflow: hidden;
+  border: 1px solid rgba(32, 43, 41, 0.07);
+  border-radius: 44% 56% 50% 50% / 51% 44% 56% 49%;
+  background:
+    radial-gradient(circle at 50% 47%, #e9eedf 0, #e9eedf 34%, transparent 35%),
+    linear-gradient(145deg, #eef1e7, #dfe8d5);
+  transform: rotate(3deg);
+}
+
+.card-orbit {
+  position: absolute;
+  width: 76%;
+  height: 76%;
+  border: 1px solid rgba(88, 126, 104, 0.18);
+  border-radius: 50%;
+}
+
+.orbit-one {
+  transform: rotate(-23deg) scaleX(0.76);
+}
+
+.orbit-two {
+  transform: rotate(39deg) scaleX(0.77);
+}
+
+.question-card {
+  position: relative;
+  display: flex;
+  width: 205px;
+  height: 238px;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  gap: 16px;
+  border: 1px solid rgba(32, 43, 41, 0.1);
+  border-radius: 18px;
+  background: #fbfcf6;
+  box-shadow: 0 24px 60px rgba(53, 76, 57, 0.13);
+  transform: rotate(-3deg);
+}
+
+.question-kicker {
+  color: #7d887b;
+  font-family: "DM Mono", monospace;
+  font-size: 8px;
+  letter-spacing: 0.12em;
+}
+
+.question-mark {
+  display: grid;
+  width: 100px;
+  height: 100px;
+  place-items: center;
+  border-radius: 34px;
+  background: var(--lime);
+  color: var(--ink);
+  font-family: "Manrope", sans-serif;
+  font-size: 68px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.question-dashes {
+  display: flex;
+  gap: 5px;
+}
+
+.question-dashes i {
+  display: block;
+  width: 22px;
+  height: 3px;
+  border-radius: 5px;
+  background: #d6ded0;
+}
+
+.question-dashes i:first-child {
+  width: 36px;
+  background: var(--green);
+}
+
+.spark {
+  position: absolute;
+  color: #77916b;
+}
+
+.spark-one {
+  top: 20%;
+  right: 24%;
+  font-size: 25px;
+}
+
+.spark-two {
+  bottom: 22%;
+  left: 22%;
+  color: #b0bf7e;
+  font-size: 21px;
+}
+
+.floating-chip {
+  position: absolute;
+  padding: 9px 13px;
+  border: 1px solid rgba(32, 43, 41, 0.08);
+  border-radius: 30px;
+  background: #fbfcf6;
+  box-shadow: 0 8px 25px rgba(53, 76, 57, 0.08);
+  color: #52674f;
+  font-size: 10px;
+  font-weight: 600;
+  transform: rotate(-3deg);
+}
+
+.chip-one {
+  top: 27%;
+  left: 11%;
+}
+
+.chip-two {
+  right: 9%;
+  bottom: 28%;
+  color: #82734b;
+  transform: rotate(5deg);
+}
+
+.footer {
+  display: flex;
+  min-height: 68px;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid rgba(32, 43, 41, 0.1);
+  color: #818980;
+  font-size: 11px;
+}
+
+.footer-stamp {
+  color: var(--ink);
+  font-family: "DM Mono", monospace;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+}
+
+.footer-stamp span {
+  color: var(--green);
+}
+
+@media (max-width: 760px) {
+  .page-shell {
+    width: min(100% - 40px, 550px);
+  }
+
+  .topbar {
+    min-height: 72px;
+  }
+
+  .topbar-note {
+    font-size: 10px;
+  }
+
+  .hero {
+    min-height: auto;
+    grid-template-columns: 1fr;
+    gap: 35px;
+    padding: 75px 0 52px;
+  }
+
+  h1 {
+    font-size: clamp(76px, 19vw, 116px);
+  }
+
+  .hero-description {
+    margin-top: 23px;
+    font-size: 15px;
+  }
+
+  .hero-caption {
+    margin-top: 28px;
+  }
+
+  .visual-card {
+    width: min(100%, 370px);
+    justify-self: center;
+  }
+
+  .footer {
+    min-height: 60px;
+  }
+}
+
+@media (max-width: 430px) {
+  .topbar-note {
+    max-width: 155px;
+    font-size: 9px;
+  }
+
+  .question-card {
+    width: 176px;
+    height: 212px;
+  }
+
+  .question-mark {
+    width: 84px;
+    height: 84px;
+    border-radius: 28px;
+    font-size: 58px;
+  }
+}
