@@ -18,7 +18,7 @@ app.get("/api/health", async (_request, response) => {
 });
 
 app.listen(port, "0.0.0.0", () => {
-  console.log(`Quiz App is listening on port ${port}`);
+  console.log(`Mohammed Quiz is listening on port ${port}`);
 });
 
 function closeServer() {
