@@ -11,6 +11,7 @@
     <title>Mohammed Quiz</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="/quiz.css">
     <script src="/app.js" defer></script>
   </head>
   <body>
@@ -49,6 +50,23 @@
           <span class="floating-chip chip-one">curiosity</span>
           <span class="floating-chip chip-two">+1 idea</span>
         </div>
+      </section>
+
+      <section id="quiz" class="quiz-section" aria-labelledby="quiz-title">
+        <div class="quiz-header">
+          <p class="eyebrow"><span aria-hidden="true">✳</span> THE QUIZ</p>
+          <h2 id="quiz-title">Ten questions. One score.</h2>
+          <p class="quiz-subtitle">
+            Answer all ten, hit submit, and see how much you really know.
+          </p>
+        </div>
+        <form class="quiz-form" aria-label="Quiz questions"></form>
+        <button type="submit" form="quiz-submit" class="quiz-submit" formaction="#" formmethod="post" disabled hidden></button>
+        <div class="quiz-actions">
+          <button type="submit" class="quiz-submit" form="quiz-submit" hidden></button>
+          <button type="submit" class="quiz-submit">Submit answers</button>
+        </div>
+        <div id="quiz-result" class="quiz-result" hidden></div>
       </section>
 
       <footer class="footer">
