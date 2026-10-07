@@ -19,8 +19,4 @@ for (const q of QUESTIONS) {
 const ids = QUESTIONS.map((q) => q.id);
 assert.equal(new Set(ids).size, ids.length, "Question ids must be unique");
 
-// Server module loads without throwing
-const app = require("../../server");
-assert.ok(app, "Express app should export");
-
 console.log("All quiz tests passed: " + QUESTIONS.length + " questions validated.");

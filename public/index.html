@@ -60,11 +60,9 @@
             Answer all ten, hit submit, and see how much you really know.
           </p>
         </div>
-        <form class="quiz-form" aria-label="Quiz questions"></form>
-        <button type="submit" form="quiz-submit" class="quiz-submit" formaction="#" formmethod="post" disabled hidden></button>
+        <form id="quiz-form" class="quiz-form" aria-label="Quiz questions"></form>
         <div class="quiz-actions">
-          <button type="submit" class="quiz-submit" form="quiz-submit" hidden></button>
-          <button type="submit" class="quiz-submit">Submit answers</button>
+          <button type="submit" class="quiz-submit" form="quiz-form">Submit answers</button>
         </div>
         <div id="quiz-result" class="quiz-result" hidden></div>
       </section>
