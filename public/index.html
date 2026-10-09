@@ -21,50 +21,84 @@
           <span class="brand-mark" aria-hidden="true">M</span>
           <span>Mohammed Quiz</span>
         </a>
-        <span class="topbar-note"><span class="live-dot" aria-hidden="true"></span> A little curiosity goes a long way</span>
+        <div id="user-nav" class="user-nav">
+          <span id="auth-section" class="auth-section">
+            <a href="#" id="btn-login" class="nav-link">Login</a>
+            <a href="#" id="btn-register" class="nav-link">Register</a>
+          </span>
+          <span id="user-info" class="user-info hidden">
+            <span class="username"></span>
+            <span class="role-badge"></span>
+            <button id="btn-logout" class="nav-link logout-btn">Logout</button>
+            <button id="btn-history" class="nav-link">History</button>
+          </span>
+        </div>
       </header>
 
-      <section class="hero" aria-labelledby="hero-title">
-        <div class="hero-copy">
-          <p class="eyebrow"><span aria-hidden="true">✳</span> THINK. ANSWER. GROW.</p>
-          <h1 id="hero-title">Mohammed <span>Quiz</span></h1>
-          <p class="hero-description">
-            A fresh question is a great place to start. Take a moment, trust what you know, and see where curiosity takes you.
+      <!-- Auth Modal -->
+      <div id="auth-modal" class="modal hidden">
+        <div class="modal-content">
+          <span class="modal-close" id="modal-close">&times;</span>
+          <h2 id="auth-title">Login</h2>
+          <p id="auth-error" class="error-message hidden"></p>
+          <form id="auth-form" class="auth-form">
+            <input type="text" id="auth-username" placeholder="Username" required>
+            <input type="password" id="auth-password" placeholder="Password" required>
+            <button type="submit" class="btn-primary">Submit</button>
+          </form>
+          <p class="auth-toggle">
+            <span id="auth-toggle-text">Don't have an account? </span>
+            <a href="#" id="auth-toggle-link">Register here</a>
           </p>
-          <div class="hero-caption">
-            <span class="caption-line" aria-hidden="true"></span>
-            <span>Good things start with a question.</span>
-          </div>
         </div>
+      </div>
 
-        <div class="visual-card" aria-hidden="true">
-          <div class="card-orbit orbit-one"></div>
-          <div class="card-orbit orbit-two"></div>
-          <div class="question-card">
-            <span class="question-kicker">A QUESTION FOR YOU</span>
-            <span class="question-mark">?</span>
-            <span class="question-dashes"><i></i><i></i><i></i></span>
-          </div>
-          <span class="spark spark-one">✳</span>
-          <span class="spark spark-two">✦</span>
-          <span class="floating-chip chip-one">curiosity</span>
-          <span class="floating-chip chip-two">+1 idea</span>
+      <!-- Quiz Selection Section -->
+      <section id="quiz-select" class="quiz-select">
+        <div class="quiz-select-header">
+          <p class="eyebrow"><span aria-hidden="true">✓</span> SELECT A QUIZ</p>
+          <h2>Choose Your Challenge</h2>
+          <p class="quiz-select-description">
+            Pick from our available quizzes. Each has 10 questions.
+          </p>
+        </div>
+        <div id="quiz-list" class="quiz-list">
+          <!-- Quizzes will be loaded here -->
         </div>
       </section>
 
-      <section id="quiz" class="quiz-section" aria-labelledby="quiz-title">
+      <!-- Quiz Section -->
+      <section id="quiz" class="quiz-section hidden">
         <div class="quiz-header">
-          <p class="eyebrow"><span aria-hidden="true">✳</span> THE QUIZ</p>
-          <h2 id="quiz-title">Ten questions. One score.</h2>
-          <p class="quiz-subtitle">
-            Answer all ten, hit submit, and see how much you really know.
+          <p class="eyebrow"><span aria-hidden="true">✓</span> <span id="quiz-title">THE QUIZ</span></p>
+          <h2 id="quiz-subtitle">Ten questions. One score.</h2>
+          <p class="quiz-description">
+            Answer all questions, hit submit, and see how much you know.
           </p>
         </div>
         <form id="quiz-form" class="quiz-form" aria-label="Quiz questions"></form>
         <div class="quiz-actions">
-          <button type="submit" class="quiz-submit" form="quiz-form">Submit answers</button>
+          <button type="button" id="btn-back-to-select" class="btn-secondary">Back to Quizzes</button>
+          <button type="submit" class="quiz-submit btn-primary" form="quiz-form">Submit answers</button>
         </div>
-        <div id="quiz-result" class="quiz-result" hidden></div>
+        <div id="quiz-result" class="quiz-result hidden"></div>
+      </section>
+
+      <!-- History Section -->
+      <section id="history" class="history-section hidden">
+        <div class="history-header">
+          <p class="eyebrow"><span aria-hidden="true">✓</span> MY HISTORY</p>
+          <h2>My Quiz Attempts</h2>
+          <p class="history-description">
+            View your completed quiz attempts and scores.
+          </p>
+        </div>
+        <div id="history-list" class="history-list">
+          <!-- History will be loaded here -->
+        </div>
+        <div class="history-actions">
+          <button type="button" id="btn-back-to-quizzes" class="btn-secondary">Back to Quizzes</button>
+        </div>
       </section>
 
       <footer class="footer">

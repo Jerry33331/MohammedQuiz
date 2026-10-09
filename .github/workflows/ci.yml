@@ -2,13 +2,24 @@ name: CI
 
 on:
   push:
-    branches: [main]
+    branches: [main, phase-2-quiz-engine]
   pull_request:
     branches: [main]
 
 jobs:
   test:
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: test
+          POSTGRES_PASSWORD: test
+          POSTGRES_DB: quiz_test
+        ports:
+          - 5432:5432
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+
     steps:
       - uses: actions/checkout@v4
 
@@ -19,23 +30,49 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Wait for PostgreSQL
+        run: |
+          for i in $(seq 1 30); do
+            if pg_isready -h localhost -U test -d quiz_test; then break; fi
+            sleep 1
+          done
+
+      - name: Create database schema
+        run: |
+          psql -h localhost -U test -d quiz_test -f src/schema.sql
+        env:
+          PGPASSWORD: test
+
+      - name: Seed database
+        run: |
+          psql -h localhost -U test -d quiz_test -f src/seed.sql
+        env:
+          PGPASSWORD: test
+
       - name: Syntax check
         run: |
           node --check server.js
           node --check src/database.js
-          node --check src/questions.js
+          node --check src/auth.js
+          node --check src/quizzes.js
           node --check public/app.js
 
       - name: Run unit tests
         run: npm test
+        env:
+          DATABASE_URL: postgres://test:test@localhost:5432/quiz_test
+          SESSION_SECRET: test-secret-key
 
-      - name: Boot server and check quiz API
+      - name: Boot server and check API
         run: |
           node server.js &
           SERVER_PID=$!
           for i in $(seq 1 20); do
-            if curl -sf http://localhost:5000/api/quiz > quiz_response.json; then break; fi
+            if curl -sf http://localhost:5000/api/health > health_response.json; then break; fi
             sleep 1
           done
-          node -e "const r=require('./quiz_response.json'); if(!r.total||r.total<1||!Array.isArray(r.questions)){process.exit(1)}; console.log('API OK: '+r.total+' questions served')"
+          node -e "const r=require('./health_response.json'); if(!r.status||!r.database){process.exit(1)}; console.log('Health check OK:', r.status)"
           kill $SERVER_PID
+        env:
+          DATABASE_URL: postgres://test:test@localhost:5432/quiz_test
+          SESSION_SECRET: test-secret-key
