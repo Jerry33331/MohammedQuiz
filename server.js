@@ -3,6 +3,7 @@ const path = require("node:path");
 const session = require("express-session");
 const PgSession = require("connect-pg-simple")(session);
 const pool = require("./src/database");
+const QUESTIONS = require("./src/questions");
 const {
   createUser,
   findUserByUsername,
