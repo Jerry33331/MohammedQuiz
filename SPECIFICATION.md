@@ -10,6 +10,7 @@
 ## Table of Contents
 
 1. [Theme and Design](#1-theme-and-design)
+1.5. [Accounts and Access Requirements](#15-accounts-and-access-requirements)
 2. [Two Custom Features](#2-two-custom-features)
 3. [Questions and Quiz Content](#3-questions-and-quiz-content)
 4. [User Experience and Navigation](#4-user-experience-and-navigation)
@@ -53,6 +54,9 @@ Clean, modern, and minimalist with a focus on readability and user engagement. T
 - **Body:** Regular weight, 16px base size
 - **Code/Technical:** `SFMono-Regular, Consolas, monospace` for any technical display
 
+### Security Requirements
+- **Password Storage:** Passwords must never be stored as plain text. All passwords must be hashed using bcryptjs before storage.
+
 ### Visual Mood
 - **Inspiration:** Modern educational platforms, clean tech blogs
 - **Mood:** Professional yet approachable, encouraging curiosity
@@ -67,6 +71,25 @@ Clean, modern, and minimalist with a focus on readability and user engagement. T
 - Apple's human interface guidelines (clean spacing)
 - GitHub's minimalist approach to content presentation
 - Educational platforms like Khan Academy (focus on learning)
+
+---
+
+## 1.5 Accounts and Access Requirements
+
+### Authentication Rules
+- Users must register with a unique username and password to access quizzes
+- Passwords must never be stored as plain text - always hashed using bcryptjs
+- Sessions must persist across page refreshes using express-session with connect-pg-simple
+
+### User Roles and Permissions
+- **Guest:** Can view landing page only, cannot take quizzes
+- **Player:** Can register, login, logout, take quizzes, view own history and profile
+- **Teacher:** Can do everything a Player can, plus edit questions, upload CSV, manage quiz content
+- **Admin:** Can do everything a Teacher can, plus manage users
+
+### Leaderboard Display Rules
+- Leaderboards must display usernames, never email addresses
+- All leaderboards show only completed attempts (unfinished attempts do not count)
 
 ---
 
@@ -150,6 +173,11 @@ Clean, modern, and minimalist with a focus on readability and user engagement. T
 - **Exactly one correct answer** per question
 - All questions include an **explanation** shown after answering
 
+### Question Assignment Rules
+- Each question belongs to exactly one quiz
+- The question editor must allow changing which quiz a question belongs to
+- Questions cannot belong to multiple quizzes simultaneously
+
 ### Quiz Topics and Details
 
 #### Quiz 1: General Knowledge
@@ -218,7 +246,17 @@ Clean, modern, and minimalist with a focus on readability and user engagement. T
 - **Logout**: Ends session, redirects to homepage
 - **Start Quiz**: Loads first question, starts new attempt
 - **Submit Quiz**: Validates all answered, calculates score, saves attempt, shows results
-- **Retry Quiz**: Starts new attempt for the same quiz
+- **Retry Quiz**: Starts a new attempt for the same quiz. All attempts including retries are saved separately as distinct records.
+
+### Session Management
+- Session timeout: 24 hours of inactivity
+- When session expires, user is redirected to login page
+- Users can have only one active session at a time (new login invalidates previous sessions)
+
+### Data Retry Rules
+- Retrying a quiz creates a brand new attempt record
+- All attempts, including retries, are saved separately to the database
+- Previous attempt records are never overwritten or deleted when retrying
 
 ---
 
@@ -244,13 +282,25 @@ Clean, modern, and minimalist with a focus on readability and user engagement. T
 6. **Profile** - User stats, streak display
 7. **Favorites** - Bookmarked questions
 8. **Question Editor** - Add/edit/delete questions
-9. **CSV Import** - Upload and preview questions
+9. **CSV Import** - Upload questions using standard template, preview, validate, import
 10. **User Management** - View/edit users (admin only)
 
 ### Mobile Behavior
 - Responsive design with hamburger menu
 - Single column layout on mobile
 - Large touch targets (44x44px minimum)
+
+### CSV Import Page Details
+- **Page title:** "Import Questions from CSV"
+- **Description:** "Upload a CSV file to add multiple questions at once using the standard template"
+- **Standard CSV Template Format (REQUIRED):**
+  - Column order: quiz_title, question_text, choice_a, choice_b, choice_c, choice_d, correct_choice, explanation
+  - correct_choice: A, B, C, or D (must match choice letter exactly)
+  - Quiz must exist or will be created automatically
+  - All fields are required (no empty cells)
+- **Example row:** `General Knowledge,What is 2+2?,1,2,3,4,A,Basic arithmetic`
+- **Template:** A downloadable standard CSV template must be provided for users
+- This is the only accepted format - users must follow the standard template exactly
 
 ---
 
@@ -259,12 +309,17 @@ Clean, modern, and minimalist with a focus on readability and user engagement. T
 ### Overall Leaderboard
 - **Ranking:** Total completed attempts (descending), then average score (descending), then join date (ascending)
 - **Display:** Rank, Username, Total Attempts, Average Score
-- **Rules:** Only completed attempts count, unfinished attempts do NOT count
+- **Rules:** Only completed attempts count, unfinished attempts do NOT count. Unfinished attempts (quizzes started but not submitted) must not be saved to the database.
+- **Username Changes:** When a user changes their username, all historical leaderboard entries must update to show the new username.
 
 ### Quiz-Specific Leaderboards
 - **Ranking:** Highest score (descending), then number of attempts (descending), then most recent date (descending)
 - **Display:** Rank, Username, Highest Score, Attempts Count, Date
 - **Rules:** Only highest score per user per quiz counts for ranking
+
+### Attempt Data Requirements
+- Each attempt record must include: user_id, quiz_id, score, total_questions, completed_at timestamp
+- Each attempt detail record must include: attempt_id, question_id, user_answer_index, is_correct, points_earned
 
 ---
 
@@ -283,15 +338,16 @@ Clean, modern, and minimalist with a focus on readability and user engagement. T
 
 ### Phase 3: Attempts + User History
 **Main Goal:** Persist quiz activity
-- Save every completed attempt with user/quiz association
-- Timestamps, personal attempt history
-- Prevent unfinished attempts from counting
+- Save every completed attempt with user_id, quiz_id, score, total_questions, completed_at timestamp
+- Associate each attempt with detailed per-question results (question_id, user_answer_index, is_correct, points_earned)
+- Timestamps on all records, personal attempt history view
+- Prevent unfinished attempts from counting or being saved to the database
 
 ### Phase 4: Leaderboards + Admin Tools
 **Main Goal:** Build shared data features and teacher management
 - Overall leaderboard, quiz leaderboards, ranking rules
 - Question editor, add/edit questions and choices, quiz assignments
-- CSV upload, preview, validation, import
+- CSV upload using standard template, preview, validation with error identification, import
 
 ### Phase 5: Custom Features + Production Readiness
 **Main Goal:** Make the project unique and production-ready
