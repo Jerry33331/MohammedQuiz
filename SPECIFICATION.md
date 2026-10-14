@@ -30,11 +30,11 @@
 High school students, teachers, and general knowledge enthusiasts who want to test their understanding across various subjects in a clean, engaging environment.
 
 ### Quiz Topics
-1. General Knowledge - Mixed questions from various categories
-2. Science - Physics, chemistry, and biology concepts
-3. History - Historical events and figures
-4. Mathematics - Math problems and concepts
-5. Geography - Countries, capitals, and world facts
+1. Action Movies - Best action scenes, stunt work, famous heroes
+2. Comedy Movies - Funniest films, comedic actors, classic jokes
+3. Sci-Fi Movies - Space, aliens, future tech, iconic franchises
+4. Horror Movies - Scary classics, monsters, directors
+5. Classic Movies - Old Hollywood, award winners, timeless films
 
 ### Overall Style
 Clean, modern, and minimalist with a focus on readability and user engagement. The design uses subtle animations and visual cues to guide users through the quiz experience without being distracting.
@@ -180,35 +180,35 @@ Clean, modern, and minimalist with a focus on readability and user engagement. T
 
 ### Quiz Topics and Details
 
-#### Quiz 1: General Knowledge
+#### Quiz 1: Action Movies
 - **Difficulty:** Easy to Medium
-- **Question Types:** Multiple choice, factual recall
-- **Tone:** Friendly, educational
-- **Knowledge Tested:** Broad general knowledge across various subjects
+- **Question Types:** Multiple choice, scene identification, actor/character matching
+- **Tone:** Exciting, energetic
+- **Knowledge Tested:** Action movie franchises, famous stunt scenes, iconic heroes and villains
 
-#### Quiz 2: Science
+#### Quiz 2: Comedy Movies
+- **Difficulty:** Easy to Medium
+- **Question Types:** Quote matching, actor identification, movie recognition
+- **Tone:** Light-hearted, fun
+- **Knowledge Tested:** Classic comedies, comedic actors, memorable scenes
+
+#### Quiz 3: Sci-Fi Movies
 - **Difficulty:** Medium
-- **Question Types:** Conceptual understanding, factual recall
-- **Tone:** Educational, precise
-- **Knowledge Tested:** Physics, chemistry, biology fundamentals
+- **Question Types:** Franchise knowledge, technology identification, alien/species matching
+- **Tone:** Futuristic, imaginative
+- **Knowledge Tested:** Space operas, dystopian futures, sci-fi concepts
 
-#### Quiz 3: History
-- **Difficulty:** Medium
-- **Question Types:** Date recall, figure identification, event knowledge
-- **Tone:** Informative, respectful
-- **Knowledge Tested:** World history, major events, historical figures
-
-#### Quiz 4: Mathematics
+#### Quiz 4: Horror Movies
 - **Difficulty:** Medium to Hard
-- **Question Types:** Calculation, conceptual, problem-solving
-- **Tone:** Clear, logical
-- **Knowledge Tested:** Arithmetic, algebra, geometry basics
+- **Question Types:** Monster/creature identification, director matching, plot details
+- **Tone:** Suspenseful, atmospheric
+- **Knowledge Tested:** Horror classics, sub-genres, iconic scenes
 
-#### Quiz 5: Geography
+#### Quiz 5: Classic Movies
 - **Difficulty:** Medium
-- **Question Types:** Location identification, factual recall
-- **Tone:** Educational, world-aware
-- **Knowledge Tested:** Countries, capitals, physical geography
+- **Question Types:** Era identification, award history, director/actor matching
+- **Tone:** Nostalgic, respectful
+- **Knowledge Tested:** Golden age of Hollywood, timeless films, cinematic history
 
 ### Question Quality Standards
 - Each question is clear and unambiguous
